@@ -16,6 +16,7 @@ add_executable(Argumentative
         src/argument/*.hpp
         src/argument/Argument.hpp
         src/argument/Flag.hpp
+        src/argument/Help.hpp
         src/argument/Option.hpp
         src/utils/typealias.hpp
         src/Argumentative.hpp

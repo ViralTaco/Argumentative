@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.1.0"
+#define VT_ARGUMENTATIVE_HPP "1.2.0"
 
 #include "utils/typealias.hpp"
 #include "argument/*.hpp"
@@ -166,7 +166,6 @@ public: // MARK: constraint 'Container'
   [[maybe_unused]] [[nodiscard]] auto crend() const noexcept {
     return const_cast<ArgVec const&> (matches_).rend();
   }
-  
 };
 
 } namespace vt = viraltaco_;

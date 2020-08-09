@@ -22,7 +22,8 @@
 namespace viraltaco_ {
 enum class ArgKind {
   option,
-  flag
+  flag,
+  help
 };
 
 struct Argument {
@@ -52,7 +53,7 @@ public: // MARK: init
     , help{ help }
     , description{ this->to_string() }
     , value{ }
-    , seen{ false }
+    , seen{ kind == ArgKind::help }
   {}
   
   Argument(StringView name, StringView help) noexcept

@@ -1,17 +1,22 @@
-#ifndef VT_ALL_HEADERS_HPP
+#ifndef VT_HELP_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ *.hpp:                                               ┃
+// ┃ Help.hpp:                                            ┃
 // ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
+// ┃ https://github.com/ViralTaco                         ┃ 
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ALL_HEADERS_HPP true
-// This header is a shortcut to include all the classes in the 'argument' folder.
+#define VT_HELP_HPP "1.0.1"
 
-#include "Flag.hpp"
-#include "Help.hpp"
-#include "Option.hpp"
 #include "Argument.hpp"
 
+namespace viraltaco_ {
+
+struct Help : public Argument {
+  [[maybe_unused]] explicit Help(StringView help) noexcept
+      : Argument{ ArgKind::help, "help"sv, help }
+    {}
+};
+
+} namespace vt = viraltaco_;
 #endif
