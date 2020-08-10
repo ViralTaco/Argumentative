@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.2.0"
+#define VT_ARGUMENTATIVE_HPP "1.3.0"
 
 #include "utils/typealias.hpp"
 #include "argument/*.hpp"
@@ -24,7 +24,7 @@
 #include <cstdint>
 #include <cstddef>
 
-namespace viraltaco_ {
+namespace argumentative {
 class Argumentative {
 public: // MARK: aliases
   using Self = Argumentative;
@@ -36,6 +36,7 @@ private: // MARK: members
   ArgVec matches_;
   
   StringView app_name_;
+  String app_version_;
   
 public: // MARK: init
   [[maybe_unused]] Argumentative(const int argc, char** argv)
@@ -43,14 +44,16 @@ public: // MARK: init
     , args_{ }
     , matches_{ }
     , app_name_{ Self::app_name(argv_[0]) }
+    , app_version_{}
   {}
   
   [[maybe_unused]] Argumentative(const int argc, char** argv,
-                                 InitList<Argument> const& args)
+                                 InitList<Argument> args)
     : argv_{ argv, argv + argc }
     , args_{ args.begin(), args.end() }
     , matches_{ Self::matches(args_, argv_) }
     , app_name_{ Self::app_name(argv_[0]) }
+    , app_version_{}
   {}
   
   // MARK: rule of five
@@ -84,6 +87,9 @@ public: // MARK: instance methods
   
   Self& append(Argument arg) {
     args_.push_back(arg);
+    if (arg.kind == ArgKind::version) {
+      app_version_ = arg.value;
+    }
     if (arg.in(argv_)) {
       matches_.push_back(arg);
     }
@@ -108,7 +114,7 @@ public: // MARK: instance methods
   
   [[nodiscard, maybe_unused]] String version() const noexcept {
     auto version = StringStream();
-    version << app_name_ << ' ' << VT_ARGUMENTATIVE_HPP << newline;
+    version << app_name_ << ' ' << app_version_ << newline;
     return version.str();
   }
   
@@ -131,7 +137,7 @@ public: // MARK: friend operator overloads
   }
   
 public: // MARK: constraint 'Container'
-  [[maybe_unused]] [[nodiscard]] auto empty() const noexcept {
+  [[nodiscard, maybe_unused]] auto empty() const noexcept {
     return matches_.empty();
   }
   
@@ -139,7 +145,7 @@ public: // MARK: constraint 'Container'
     return matches_.begin();
   }
   
-  [[maybe_unused]] [[nodiscard]] auto cbegin() const noexcept {
+  [[nodiscard, maybe_unused]] auto cbegin() const noexcept {
     return const_cast<ArgVec const&> (matches_).begin();
   }
   
@@ -147,7 +153,7 @@ public: // MARK: constraint 'Container'
     return matches_.rbegin();
   }
   
-  [[maybe_unused]] [[nodiscard]] auto crbegin() const noexcept {
+  [[nodiscard, maybe_unused]] auto crbegin() const noexcept {
     return const_cast<ArgVec const&> (matches_).rbegin();
   }
   
@@ -155,7 +161,7 @@ public: // MARK: constraint 'Container'
     return matches_.end();
   }
   
-  [[maybe_unused]] [[nodiscard]] auto cend() const noexcept {
+  [[nodiscard, maybe_unused]] auto cend() const noexcept {
     return const_cast<ArgVec const&> (matches_).end();
   }
   
@@ -163,10 +169,10 @@ public: // MARK: constraint 'Container'
     return matches_.rend();
   }
   
-  [[maybe_unused]] [[nodiscard]] auto crend() const noexcept {
+  [[nodiscard, maybe_unused]] auto crend() const noexcept {
     return const_cast<ArgVec const&> (matches_).rend();
   }
 };
 
-} namespace vt = viraltaco_;
+} namespace ive = argumentative;
 #endif

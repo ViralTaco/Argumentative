@@ -10,7 +10,7 @@
 
 #include "../../utils/typealias.hpp"
 
-namespace viraltaco_ {
+namespace argumentative {
 
 class [[maybe_unused]] InvalidOption: public std::exception {
 public: // MARK: alias
@@ -26,7 +26,7 @@ public: // MARK: init
   {
     const auto len = opt_name.length() + std::strlen(fmt_);
     auto buf = new char[len];
-    if (vt::swap_sign(len) <= std::snprintf(buf, len, fmt_, opt_name.data())) {
+    if (ive::swap_sign(len) <= std::snprintf(buf, len, fmt_, opt_name.data())) {
       msg_ = fmt_;
       msg_ += newline;
       msg_ += __func__;
@@ -44,5 +44,5 @@ public: // MARK: instance methods
 };
 
 }
-namespace vt = viraltaco_;
+namespace ive = argumentative;
 #endif

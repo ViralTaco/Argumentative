@@ -6,17 +6,21 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_HELP_HPP "1.0.2"
+#define VT_HELP_HPP "1.0.3"
 
 #include "Argument.hpp"
 
-namespace viraltaco_ {
+namespace argumentative {
 
 struct Help : public Argument {
   [[maybe_unused]] explicit Help(StringView help) noexcept
-      : Argument{ ArgKind::help, "help", help }
-    {}
+    : Argument{ ArgKind::help, "help", help }
+  {}
+  
+  [[maybe_unused]] Help() noexcept
+    : Help{ "Show help for this command." }
+  {}
 };
 
-} namespace vt = viraltaco_;
+} namespace ive = argumentative;
 #endif

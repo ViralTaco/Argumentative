@@ -22,7 +22,7 @@
 #include <memory>
 #include <functional>
 
-namespace viraltaco_ {
+namespace argumentative {
 inline namespace typealias {
   // MARK: Integers
   using SizeType = std::size_t;
@@ -55,6 +55,6 @@ inline namespace typealias {
 
   static constexpr auto newline = "\r\n";
 } // inline namespace typealias
-} namespace vt = viraltaco_;
+} namespace ive = argumentative;
 
 #endif

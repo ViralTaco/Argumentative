@@ -11,6 +11,7 @@
 
 #include "Flag.hpp"
 #include "Help.hpp"
+#include "Version.hpp"
 #include "Option.hpp"
 #include "Argument.hpp"
 

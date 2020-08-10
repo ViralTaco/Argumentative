@@ -15,7 +15,7 @@
 #include <string_view>
 #include <utility>
 
-namespace viraltaco_ {
+namespace argumentative {
 /**
  * This structure hold a name and the help message.
  * If it is equal to one of the arguments parsed at runtime
@@ -28,5 +28,5 @@ public: // MARK: init
   {}
 };
 
-} namespace vt = viraltaco_;
+} namespace ive = argumentative;
 #endif

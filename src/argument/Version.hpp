@@ -1,26 +1,24 @@
-#ifndef VT_SWAP_SIGN_HPP
+#ifndef VT_VERSION_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ swap_sign.hpp:                                       ┃
+// ┃ Version.hpp:                                         ┃
 // ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
+// ┃ https://github.com/ViralTaco                         ┃ 
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_SWAP_SIGN_HPP "1.0.1"
+#define VT_VERSION_HPP "1.0.1"
 
-#include <type_traits>
+#include "Argument.hpp"
 
 namespace argumentative {
-
-template <class T> [[nodiscard, maybe_unused]]
-constexpr auto swap_sign(const T integral) noexcept {
-  if constexpr (std::is_unsigned_v<T>) { // unsigned --> signed
-    return static_cast< std::make_signed_t<T> > (integral);
-  } else {                               // signed --> unsigned
-    return static_cast< std::make_unsigned_t<T> > (integral);
+struct Version : public Argument {
+  [[maybe_unused]] explicit Version(String version) noexcept
+    : Argument{ ArgKind::version, "version",
+                "Show the version of this application." }
+  {
+    this->value = version;
   }
-}
+};
 
 } namespace ive = argumentative;
-
 #endif

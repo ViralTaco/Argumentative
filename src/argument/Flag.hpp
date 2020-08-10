@@ -10,12 +10,12 @@
 
 #include "Argument.hpp"
 
-namespace viraltaco_ {
+namespace argumentative {
 
 struct Flag: public Argument {
 public: // MARK: init
   using Argument::Argument;
 };
 
-} namespace vt = viraltaco_;
+} namespace ive = argumentative;
 #endif

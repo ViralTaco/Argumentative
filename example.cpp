@@ -9,18 +9,19 @@ static void pcount(const int from, const int to) noexcept {
 }
 
 static void pcount(const int to) noexcept { pcount(0, to); }
-}
+} namespace vt = viraltaco_;
 
 int main(int argc, char** argv) {
-  using namespace viraltaco_;
-  
-  Flag help("help", "Show this help message");
-  Flag version("version", "Show the version number");
-  Option count("count", "Counts up to N");
+  using namespace argumentative;
+  Help help; // default help message.
+  Version version(VT_ARGUMENTATIVE_HPP);
+  Flag line("line", "Print a line after app runs.");
+  Option count("count", "Counts up to N.");
   
   Argumentative app(argc, argv);
   app.append(help)
      .append(version)
+     .append(line)
      .append(count);
   
   if (app.empty()) {
@@ -28,8 +29,11 @@ int main(int argc, char** argv) {
     std::exit(EXIT_SUCCESS);
   }
   
+  bool print_line = false;
   for (auto const& arg: app) {
-    if (arg == version) {
+    if (arg == line) {
+      print_line = true;
+    } else if (arg == version) {
       std::cout << app.version();
     } else if (arg == count) {
       const auto to = std::stoi(arg.value);
@@ -38,5 +42,7 @@ int main(int argc, char** argv) {
       std::cout << app.usage();
     }
   }
+  
+  if (print_line) { std::cout << std::string(60, '_') << std::endl; }
 }
 

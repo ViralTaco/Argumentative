@@ -19,8 +19,9 @@
 
 #include <algorithm>
 
-namespace viraltaco_ {
+namespace argumentative {
 enum class ArgKind {
+  version,
   option,
   flag,
   help
@@ -31,29 +32,25 @@ public: // MARK: aliases
   using Self = Argument;
 
 protected: // MARK: Polymorphism be damned.
-  ArgKind kind_ = ArgKind::flag;
   static constexpr auto kTag = "--";
 
 public: // MARK: members
-#define VT_PADDING(qty, name) [[maybe_unused, gnu::visibility("hidden")]] Byte p_##name[qty]{}
-  VT_PADDING(4, name);
+  ArgKind kind;
   String name;
   StringView help;
   String description;
   
   String value;
   bool seen = false;
-  VT_PADDING(7, seen);
-#undef VT_PADDING
-
+  
 public: // MARK: init
   Argument(ArgKind kind, StringView name, StringView help) noexcept
-    : kind_{ kind }
+    : kind{ kind }
     , name{ String(kTag).append(name) }
     , help{ help }
     , description{ this->to_string() }
     , value{ }
-    , seen{ kind == ArgKind::help }
+    , seen{ kind == ArgKind::help or kind == ArgKind::version }
   {}
   
   Argument(StringView name, StringView help) noexcept
@@ -73,7 +70,7 @@ public: // MARK: instance methods
     auto str = StringStream();
     str << '[' << name;
     
-    switch (kind_) {
+    switch (kind) {
     case ArgKind::option:
       str << " <" << name.substr(2) << ">]";
       break;
@@ -90,7 +87,7 @@ public: // MARK: instance methods
 
     if (not (this->seen = arg != end)) {
       return false;
-    } else if (kind_ == ArgKind::option) {
+    } else if (kind == ArgKind::option) {
       if ((++arg) != end) {
         this->value = *arg;
       } else {
@@ -130,8 +127,7 @@ public: // MARK: friend operator overloads
     }
     return out << self.help;
   }
-  
 };
 
-} namespace vt = viraltaco_;
+} namespace ive = argumentative;
 #endif
