@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_HELP_HPP "1.0.3"
+#define VT_HELP_HPP "1.0.4"
 
 #include "Argument.hpp"
 
@@ -18,7 +18,7 @@ struct Help : public Argument {
   {}
   
   [[maybe_unused]] Help() noexcept
-    : Help{ "Show help for this command." }
+    : Help{ "Show help for this application." }
   {}
 };
 
