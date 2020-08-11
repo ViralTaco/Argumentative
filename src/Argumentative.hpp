@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.3.1"
+#define VT_ARGUMENTATIVE_HPP "1.3.2"
 
 #include "utils/typealias.hpp"
 #include "argument/*.hpp"
