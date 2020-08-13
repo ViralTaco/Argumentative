@@ -74,8 +74,8 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **Anthony Capobianco** - *Initial work* - [viraltaco_](https://github.com
-/ViralTaco)
+* **Anthony Capobianco** - *Initial work* - 
+[viraltaco_](https://github.com/ViralTaco)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
