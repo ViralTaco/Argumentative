@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.3.1"
+#define VT_ARGUMENTATIVE_HPP "1.4.0"
 
 #ifndef VT_TYPEALIAS_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -69,28 +69,6 @@ static constexpr auto newline = "\r\n";
 namespace ive = argumentative;
 
 #endif
-
-#ifndef VT_ALL_HEADERS_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ *.hpp:                                               ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ALL_HEADERS_HPP true
-// This header is a shortcut to include all the classes in the 'argument'
-// folder.
-
-#ifndef VT_FLAG_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Flag.hpp:                                            ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_FLAG_HPP "2.3.1"
 
 #ifndef VT_ARGUMENT_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -407,94 +385,6 @@ struct Argument {
 
 }  // namespace argumentative
 namespace ive = argumentative;
-#endif
-
-namespace argumentative {
-
-struct Flag : public Argument {
- public:  // MARK: init
-  using Argument::Argument;
-};
-
-}  // namespace argumentative
-namespace ive = argumentative;
-#endif
-
-#ifndef VT_HELP_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Help.hpp:                                            ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_HELP_HPP "1.0.4"
-
-namespace argumentative {
-
-struct Help : public Argument {
-  [[maybe_unused]] explicit Help(StringView help) noexcept
-      : Argument{ArgKind::help, "help", help} {}
-
-  [[maybe_unused]] Help() noexcept : Help{"Show help for this application."} {}
-};
-
-}  // namespace argumentative
-namespace ive = argumentative;
-#endif
-
-#ifndef VT_VERSION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Version.hpp:                                         ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_VERSION_HPP "1.0.1"
-
-namespace argumentative {
-struct Version : public Argument {
-  [[maybe_unused]] explicit Version(String version) noexcept
-      : Argument{ArgKind::version, "version",
-                 "Show the version of this application."} {
-    this->value = version;
-  }
-};
-
-}  // namespace argumentative
-namespace ive = argumentative;
-#endif
-
-#ifndef VT_OPTION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Option.hpp:                                          ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_OPTION_HPP "7.2.0"
-
-#include <string_view>
-#include <utility>
-
-namespace argumentative {
-/**
- * This structure hold a name and the help message.
- * If it is equal to one of the arguments parsed at runtime
- * then an object containing a reference to it and the corresponding argument
- */
-struct Option : public Argument {
- public:  // MARK: init
-  [[maybe_unused]] Option(StringView name, StringView help) noexcept
-      : Argument{ArgKind::option, name, help} {}
-};
-
-}  // namespace argumentative
-namespace ive = argumentative;
-#endif
-
 #endif
 
 #include <algorithm>  // std::copy_if

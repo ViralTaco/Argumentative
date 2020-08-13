@@ -1,7 +1,7 @@
 #!bin/env bash
 
 #project constants:
-APP_SRC="./src/Argumentative.hpp"
+APP_SRC="./includes/Argumentative.hpp"
 HEADER_NAME="vt_argumentative.hpp"
 QUOM_ARGS="-g VT_.+_HPP -t"
 

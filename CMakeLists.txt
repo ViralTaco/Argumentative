@@ -7,21 +7,17 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -Og -ggdb3 -fsanitize=undefined")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2")
 
 include_directories(.)
-include_directories(src)
-include_directories(src/argument)
-include_directories(src/argumentative)
-include_directories(src/utils)
+include_directories(includes)
 
 add_executable(Argumentative
-        src/argument/*.hpp
-        src/argument/Argument.hpp
-        src/argument/Flag.hpp
-        src/argument/Help.hpp
-        src/argument/Version.hpp
-        src/argument/Option.hpp
-        src/utils/typealias.hpp
-        src/Argumentative.hpp
-        src/utils/swap_sign.hpp
-        src/argument/errors/InvalidOption.hpp
+        includes/argumentative/utils/typealias.hpp
+        includes/argumentative/utils/swap_sign.hpp
+        includes/argumentative/argument/errors/InvalidOption.hpp
+        includes/argumentative/argument/Argument.hpp
+        includes/argumentative/argument/Option.hpp
+        includes/argumentative/argument/Flag.hpp
+        includes/argumentative/argument/Help.hpp
+        includes/argumentative/argument/Version.hpp
+        includes/Argumentative.hpp
         example.cpp)
 
