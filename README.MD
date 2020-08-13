@@ -87,3 +87,5 @@ see [MIT](https://opensource.org/licenses/MIT) for more information.
 ## Acknowledgments
 
 * [PurpleBooth](https://github.com/PurpleBooth/) for their `README.md` [template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [Viatorus](https://github.com/Viatorus) for [quom](https://github.com/Viatorus/quom) for the single header tool.
+* [The LLVM Foundation](http://llvm.org/foundation/) for [clang-format](https://clang.llvm.org/docs/ClangFormat.html) 
