@@ -17,7 +17,7 @@ Coming soon.
 Download [vt_argumentative.hpp](./vt_argumentative.hpp).
 Add it to you project. For example in a folder named `include`.
 
-Include the header to your the cpp containing you main function.
+Include the header to your .cpp file containing you main function.
 ```c++
 #include "vt_argumentative.hpp"
 // […]
