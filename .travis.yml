@@ -27,3 +27,5 @@ install:
   - sudo apt-get -y install ninja-build cmake
   - export CXX=${COMPILER}
   - ${CXX} --version
+script:
+  - echo ${CXX}
