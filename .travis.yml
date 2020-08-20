@@ -25,9 +25,6 @@ jobs:
 before_install:
   - sudo apt-get -y -d update
 install:
-  - sudo apt-get -y install ninja-build clang-format
+  - sudo apt-get -y install ninja-build
   - export CXX=${COMPILER}
   - ${CXX} --version
-  - pip install quom
-script:
-  - ./make_header.sh
