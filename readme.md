@@ -1,5 +1,17 @@
-# *Argumentative*
-
+<div class="d-flex mb-3 px-3 px-md-4 px-lg-5">
+  <div class="flex-auto min-width-0 width-fit mr-3">
+      <h1 class="d-flex flex-wrap flex-items-center break-word f3 text-normal">
+        <span itemprop="name" class="ml-2 flex-self-stretch">Argumentative</span>
+        <span class="mr-2 flex-self-stretch">
+          <a class="flex-shrink-0 d-none d-md-inline"
+             href="https://travis-ci.com/ViralTaco/Argumentative">
+            <img src="https://travis-ci.com/ViralTaco/Argumentative.svg?branch=master">
+          </a>
+        </span>  
+      </h1>
+    </div>
+  </div>
+</div>  
 A simple command line agrument parser for C++.
 
 ## Getting Started
