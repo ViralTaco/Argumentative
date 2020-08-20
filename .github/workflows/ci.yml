@@ -27,11 +27,11 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        compiler: [clang++-10, g++-10]
+        compiler: [clang++, g++]
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
-      run: sudo apt-get update && sudo apt-get -y install ninja-build clang-10 g++-10 g++-multilib
+      run: sudo apt-get update && sudo apt-get -y install ninja-build clang g++ g++-multilib
     - name: Run tests
       run: |
         cmake -G Ninja .
@@ -42,7 +42,7 @@ jobs:
 
   linux-latest:
     name: Linux Latest Config
-    needs: [linux-min, configuration-test]
+    needs: linux-min
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -70,7 +70,7 @@ jobs:
 
   windows:
     name: Windows
-    needs: [linux-min, configuration-test]
+    needs: [linux-min]
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
@@ -83,7 +83,7 @@ jobs:
 
   mac:
     name: MacOS
-    needs: [linux-min, configuration-test]
+    needs: [linux-min]
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
