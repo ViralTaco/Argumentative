@@ -1,8 +1,7 @@
-sudo: false
 language: cpp
 os: linux
-
-matrix:
+dist: trusty
+jobs:
   include:
     - env: COMPILER=g++-5
       dist: xenial
@@ -22,15 +21,6 @@ matrix:
         apt:
           packages:
             - clang-9
-
-    - env: COMPILER=g++-10
-      dist: bionic
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-10
 
 before_install:
   - sudo apt-get -y -d update
