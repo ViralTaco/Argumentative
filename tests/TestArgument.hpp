@@ -8,15 +8,7 @@
 #include "../include/argumentative/utils/typealias.hpp"
 #include "TestCase.hpp"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wkeyword-macro"
-// This is evil but it makes testing easier:
-#define protected public
-#define private public
 #include "../include/argumentative/argument/Argument.hpp"
-#undef private
-#undef protected
-#pragma clang diagnostic pop
 
 namespace argument_tests {
 using namespace argumentative;

@@ -30,11 +30,9 @@ enum class ArgKind {
 struct Argument {
 public: // MARK: aliases
   using Self = Argument;
-
-protected: // MARK: Polymorphism be damned.
-  static constexpr auto kTag = "--";
-
+  
 public: // MARK: members
+  static constexpr auto kTag = "--";
   ArgKind kind;
   String name;
   StringView help;

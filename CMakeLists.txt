@@ -3,7 +3,10 @@ get_filename_component(lib_argumentative
 cmake_minimum_required(VERSION 3.16)
 
 
-project(${lib_argumentative} CXX)
+project(${lib_argumentative}
+        LANGUAGES       CXX
+        VERSION         1.6.0
+        DESCRIPTION     "Sweetest argument parser ever.")
 string(CONCAT tests
         ${lib_argumentative} "Tests")
 
