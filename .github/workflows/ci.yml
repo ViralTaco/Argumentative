@@ -9,19 +9,8 @@ on:
     - master
 
 jobs:
-  configuration-test:
-    name: Check Configuration
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Configlet
-      run: |
-        bin/fetch-configlet
-        bin/configlet lint .
-        bin/check-configlet-fmt.sh
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+  include:
+    - env: BUILD_CONF='--build . --target ALL_TESTS -- -j 9'
   linux-min:
     name: Linux Min Config
     runs-on: ubuntu-16.04
@@ -34,8 +23,8 @@ jobs:
       run: sudo apt-get update && sudo apt-get -y install ninja-build clang g++ g++-multilib
     - name: Run tests
       run: |
-        cmake -G Ninja .
-        cmake --build . --target ArgumentativeTests -- -j 9
+        cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
+        cmake $BUILD_CONF
         cmake --build .
       env:
         CXX: ${{ matrix.compiler }}
@@ -50,12 +39,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
-      run: sudo apt-get update && sudo apt-get -y install ninja-build
+      run: sudo apt-get update && sudo apt-get -y install make
     - name: Run tests
       if: matrix.compiler == 'g++'
       run: |
-        cmake -G Ninja .
-        cmake --build . --target ArgumentativeTests -- -j 9
+        cmake -G "CodeBlocks - Unix Makefiles" .
+        cmake $BUILD_CONF
         cmake --build .
       env:
         CXX: ${{ matrix.compiler }}
@@ -63,7 +52,7 @@ jobs:
       if: matrix.compiler == 'clang++'
       run: |
         cmake -G Ninja .
-        cmake --build . --target ArgumentativeTests -- -j 9
+        cmake $BUILD_CONF
         cmake --build .
       env:
         CXX: ${{ matrix.compiler }}
@@ -90,5 +79,5 @@ jobs:
     - name: Run Tests
       run: |
         cmake .
-        cmake --build . -- test_hello-world
+        cmake $BUILD_CONF
         cmake --build .
