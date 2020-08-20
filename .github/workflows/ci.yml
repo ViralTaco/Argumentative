@@ -9,6 +9,19 @@ on:
     - master
 
 jobs:
+  configuration-test:
+    name: Check Configuration
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Configlet
+      run: |
+        bin/fetch-configlet
+        bin/configlet lint .
+        bin/check-configlet-fmt.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   linux-min:
     name: Linux Min Config
     runs-on: ubuntu-16.04
