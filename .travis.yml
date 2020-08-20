@@ -15,7 +15,6 @@ jobs:
 
     - env:
       - COMPILER=clang++-9
-      - EXERCISM_COMMON_CATCH=false
       dist: bionic
       addons:
         apt:
@@ -25,6 +24,6 @@ jobs:
 before_install:
   - sudo apt-get -y -d update
 install:
-  - sudo apt-get -y install ninja-build
+  - sudo apt-get -y install ninja-build cmake
   - export CXX=${COMPILER}
   - ${CXX} --version
