@@ -6,10 +6,14 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.5.0"
+#define VT_ARGUMENTATIVE_HPP "1.5.1"
 
 #include "argumentative/utils/typealias.hpp"
 #include "argumentative/argument/Argument.hpp"
+#include "argumentative/argument/Flag.hpp"
+#include "argumentative/argument/Option.hpp"
+#include "argumentative/argument/Help.hpp"
+#include "argumentative/argument/Version.hpp"
 
 #include <utility>   // std::move, std::forward
 #include <iterator>  // std::back_inserter

@@ -1,7 +1,11 @@
 #ifndef VT_TEST_ARGUMENT_HPP
-#define VT_TEST_ARGUMENT_HPP "1.0.0"
+#define VT_TEST_ARGUMENT_HPP "1.0.1"
 
-#include "assert.hpp"
+#include <string_view>
+#include <initializer_list>
+#include <stdexcept>
+
+#include "../include/argumentative/utils/typealias.hpp"
 #include "TestCase.hpp"
 
 #pragma clang diagnostic push
@@ -13,7 +17,6 @@
 #undef private
 #undef protected
 #pragma clang diagnostic pop
-
 
 namespace argument_tests {
 using namespace argumentative;
@@ -70,13 +73,13 @@ static constexpr auto test_is_eq = [] () {
   assert_equal(arg, arh);
 };
 
-const vt::TestCases all{
-   { "constructor"sv, test_init },
-   { "to_string()"sv,test_to_string },
-   { "in()"sv, test_in },
-   { "=(String)"sv, test_operator_eq },
-   { "==(StringView)"sv, test_is_eq_sv },
-   { "==(Argument)"sv, test_is_eq },
+[[maybe_unused]] const vt::TestCases all{
+   { "constructor"sv,     test_init        },
+   { "to_string()"sv,     test_to_string   },
+   { "in()"sv,            test_in          },
+   { "=(String)"sv,       test_operator_eq },
+   { "==(StringView)"sv,  test_is_eq_sv    },
+   { "==(Argument)"sv,    test_is_eq       },
 };
 } // namespace argumentative_tests
 

@@ -1,23 +1,37 @@
+get_filename_component(lib_argumentative
+        ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 cmake_minimum_required(VERSION 3.16)
-project(Argumentative CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Wunreachable-code -Wredundant-decls")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -Og -ggdb3 -fsanitize=undefined")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2")
 
-include_directories(.)
-include_directories(include)
+project(${lib_argumentative} CXX)
+string(CONCAT tests
+        ${lib_argumentative} "Tests")
 
-add_executable(Argumentative
-        include/argumentative/utils/typealias.hpp
-        include/argumentative/utils/swap_sign.hpp
-        include/argumentative/argument/errors/InvalidOption.hpp
-        include/argumentative/argument/Argument.hpp
-        include/argumentative/argument/Option.hpp
-        include/argumentative/argument/Flag.hpp
-        include/argumentative/argument/Help.hpp
-        include/argumentative/argument/Version.hpp
-        include/Argumentative.hpp
-        example.cpp)
+set(flags "-Wall -Wextra -Wpedantic -Wunreachable-code -Wredundant-decls")
+set(properties
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS ON
+        CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flags}"
+        CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -Og -ggdb3 -fsanitize=undefined"
+        CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -march=native")
 
+set(lib_hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/utils/typealias.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/utils/swap_sign.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/argument/errors/InvalidOption.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/argument/Argument.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/argument/Option.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/argument/Flag.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/argument/Help.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/argumentative/argument/Version.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/Argumentative.hpp)
+set(test_hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/assert.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestArgument.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestCase.hpp)
+
+add_executable(${lib_argumentative} example.cpp ${lib_hpp})
+set_target_properties(${lib_argumentative} PROPERTIES ${properties})
+add_subdirectory(tests)
+add_custom_target(ALL_TESTS ALL DEPENDS ${lib_argumentative} COMMAND ${tests})

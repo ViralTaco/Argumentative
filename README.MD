@@ -48,10 +48,7 @@ int main(int argc, char** argv) {
 ```
 ## Running the tests
 
-Sadly no tests are provided. I currently use a custom test suite. 
-
-As soon as one using a somewhat standard library is written I'll add it to
- the files. 
+Run `ArgumentativeTests`
 
 ## Deployment
 
