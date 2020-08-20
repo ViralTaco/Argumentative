@@ -1,0 +1,43 @@
+sudo: false
+language: cpp
+os: linux
+
+matrix:
+  include:
+    - env: COMPILER=g++-5
+      dist: xenial
+
+    - env: COMPILER=clang++-8
+      dist: xenial
+      addons:
+        apt:
+          packages:
+            - clang-8
+
+    - env:
+      - COMPILER=clang++-9
+      - EXERCISM_COMMON_CATCH=false
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - clang-9
+
+    - env: COMPILER=g++-10
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-10
+
+before_install:
+  - sudo apt-get -y -d update
+install:
+  - sudo apt-get -y install ninja-build clang-format
+  - export CXX=${COMPILER}
+  - ${CXX} --version
+  - pip install quom
+script:
+  - ./make_header.sh
