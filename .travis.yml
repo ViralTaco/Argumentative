@@ -26,6 +26,9 @@ before_install:
 install:
   - sudo apt-get -y install ninja-build cmake
   - export CXX=${COMPILER}
+  - export CMAKE_GEN="CodeBlocks - Unix Makefiles"
   - ${CXX} --version
 script:
-  - echo ${CXX}
+  - cmake -DCMAKE_BUILD_TYPE=Debug -G "${CMAKE_GEN}" .
+  - cmake --build . --target ALL_TESTS -- -j 9
+  - cmake .
