@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENT_HPP "2.1.0"
+#define VT_ARGUMENT_HPP "2.2.1"
 
 #include "../utils/typealias.hpp"
 #include "../utils/swap_sign.hpp"
@@ -15,6 +15,7 @@
 #include <string_view>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <utility>
 
 #include <algorithm>
@@ -55,7 +56,7 @@ public: // MARK: init
     : Argument{ ArgKind::flag, name, help }
   {}
   
-  Argument() noexcept = default;
+  Argument() noexcept = delete;
   Argument(Self const&) noexcept = default;
   Argument(Self&&) = default;
   
@@ -116,14 +117,9 @@ public: // MARK: operator overloads
 public: // MARK: friend operator overloads
   friend std::ostream&
   operator <<(std::ostream& out, Self const& self) noexcept {
-    const auto len = self.name.length();
-    
-    if (len >= 20) {
-      out << self.name << '\t';
-    } else {
-      out << self.name << String(20ull - len, ' ') << '\t';
-    }
-    return out << self.help;
+    const auto padding = 20 - self.name.length();
+    return out << self.name  << std::setw((padding > 0) ? padding : 1)
+               << std::right << '\t' << self.help;
   }
 };
 

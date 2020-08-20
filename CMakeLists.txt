@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(${lib_argumentative}
         LANGUAGES       CXX
-        VERSION         1.6.0
+        VERSION         1.6.2
         DESCRIPTION     "Sweetest argument parser ever.")
 string(CONCAT tests
         ${lib_argumentative} "Tests")
@@ -32,7 +32,8 @@ set(lib_hpp
 set(test_hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/assert.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestArgument.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestCase.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestCase.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestInvalidOption.hpp)
 
 add_executable(${lib_argumentative} example.cpp ${lib_hpp})
 set_target_properties(${lib_argumentative} PROPERTIES ${properties})

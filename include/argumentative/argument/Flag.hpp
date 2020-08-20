@@ -6,14 +6,13 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_FLAG_HPP "2.3.1"
+#define VT_FLAG_HPP "2.3.2"
 
 #include "Argument.hpp"
 
 namespace argumentative {
 
 struct Flag: public Argument {
-public: // MARK: init
   using Argument::Argument;
 };
 

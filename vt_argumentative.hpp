@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.5.1"
+#define VT_ARGUMENTATIVE_HPP "1.6.0"
 
 #ifndef VT_TYPEALIAS_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -78,7 +78,7 @@ namespace ive = argumentative;
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENT_HPP "2.1.0"
+#define VT_ARGUMENT_HPP "2.2.1"
 
 #ifndef VT_TYPEALIAS_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -179,7 +179,11 @@ namespace ive = argumentative;
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_INVALID_OPTION_HPP "1.0.0"
+#define VT_INVALID_OPTION_HPP "2.0.0"
+
+#include <exception>  // std::exception
+#include <sstream>    // std::stringstream
+#include <string>     // std::string
 
 #ifndef VT_TYPEALIAS_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -246,27 +250,16 @@ namespace ive = argumentative;
 namespace argumentative {
 
 class [[maybe_unused]] InvalidOption : public std::exception {
- public:  // MARK: alias
-  using Self = InvalidOption;
-
  protected:  // MARK: member
-  static constexpr auto fmt_ = "Option %s wasn't provided with an argument.";
+  static constexpr auto fmt_ = [](const auto s) {
+    auto fmt = StringStream();
+    fmt << "Option " << s << " wasn't provided with an argument.";
+    return fmt.str();
+  };
   String msg_;
 
  public:  // MARK: init
-  explicit InvalidOption(StringView opt_name) noexcept : msg_{} {
-    const auto len = opt_name.length() + std::strlen(fmt_);
-    auto buf = new char[len];
-    if (ive::swap_sign(len) <= std::snprintf(buf, len, fmt_, opt_name.data())) {
-      msg_ = fmt_;
-      msg_ += newline;
-      msg_ += __func__;
-      msg_ += " ERROR DURING FORMATTING";
-    } else {
-      msg_ = buf;
-    }
-    delete[] buf;
-  }
+  explicit InvalidOption(StringView opt_name) noexcept : msg_{fmt_(opt_name)} {}
 
  public:  // MARK: instance methods
   [[nodiscard]] char const* what() const noexcept override {
@@ -279,6 +272,7 @@ namespace ive = argumentative;
 #endif
 
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -291,10 +285,8 @@ struct Argument {
  public:  // MARK: aliases
   using Self = Argument;
 
- protected:  // MARK: Polymorphism be damned.
-  static constexpr auto kTag = "--";
-
  public:  // MARK: members
+  static constexpr auto kTag = "--";
   ArgKind kind;
   String name;
   StringView help;
@@ -315,7 +307,7 @@ struct Argument {
   Argument(StringView name, StringView help) noexcept
       : Argument{ArgKind::flag, name, help} {}
 
-  Argument() noexcept = default;
+  Argument() noexcept = delete;
   Argument(Self const&) noexcept = default;
   Argument(Self&&) = default;
 
@@ -372,14 +364,9 @@ struct Argument {
  public:  // MARK: friend operator overloads
   friend std::ostream& operator<<(std::ostream& out,
                                   Self const& self) noexcept {
-    const auto len = self.name.length();
-
-    if (len >= 20) {
-      out << self.name << '\t';
-    } else {
-      out << self.name << String(20ull - len, ' ') << '\t';
-    }
-    return out << self.help;
+    const auto padding = 20 - self.name.length();
+    return out << self.name << std::setw((padding > 0) ? padding : 1)
+               << std::right << '\t' << self.help;
   }
 };
 
@@ -395,12 +382,11 @@ namespace ive = argumentative;
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_FLAG_HPP "2.3.1"
+#define VT_FLAG_HPP "2.3.2"
 
 namespace argumentative {
 
 struct Flag : public Argument {
- public:  // MARK: init
   using Argument::Argument;
 };
 
@@ -468,14 +454,16 @@ namespace ive = argumentative;
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_VERSION_HPP "1.0.1"
+#define VT_VERSION_HPP "1.1.0"
+
+#include <utility>
 
 namespace argumentative {
 struct Version : public Argument {
   [[maybe_unused]] explicit Version(String version) noexcept
       : Argument{ArgKind::version, "version",
                  "Show the version of this application."} {
-    this->value = version;
+    this->value = std::move(version);
   }
 };
 

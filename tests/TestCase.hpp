@@ -48,9 +48,11 @@ public: // class methods
     }
   };
   
-  static constexpr auto test_all = [] (auto all) {
+  static constexpr auto test_all = [] (auto all, auto class_name) {
     const auto line = std::string(60, '=');
-    std::cout << line << "\nClass Argument:\n" << line << std::endl;
+    std::cout << line
+              << "\nClass " << class_name << ":\n"
+              << line << std::endl;
     std::for_each(std::begin(all), std::end(all), TestCase::run);
   };
 };

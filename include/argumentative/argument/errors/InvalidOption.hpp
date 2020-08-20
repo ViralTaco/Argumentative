@@ -6,36 +6,29 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_INVALID_OPTION_HPP "1.0.0"
+#define VT_INVALID_OPTION_HPP "2.0.0"
+
+#include <exception> // std::exception
+#include <string>    // std::string
+#include <sstream>   // std::stringstream
 
 #include "../../utils/typealias.hpp"
 
 namespace argumentative {
 
 class [[maybe_unused]] InvalidOption: public std::exception {
-public: // MARK: alias
-  using Self = InvalidOption;
-  
 protected: // MARK: member
-  static constexpr auto fmt_ = "Option %s wasn't provided with an argument.";
+  static constexpr auto fmt_ = [] (const auto s) {
+    auto fmt = StringStream();
+    fmt << "Option " << s << " wasn't provided with an argument.";
+    return fmt.str();
+  };
   String msg_;
   
 public: // MARK: init
   explicit InvalidOption(StringView opt_name) noexcept
-    : msg_{ }
-  {
-    const auto len = opt_name.length() + std::strlen(fmt_);
-    auto buf = new char[len];
-    if (ive::swap_sign(len) <= std::snprintf(buf, len, fmt_, opt_name.data())) {
-      msg_ = fmt_;
-      msg_ += newline;
-      msg_ += __func__;
-      msg_ += " ERROR DURING FORMATTING";
-    } else {
-      msg_ = buf;
-    }
-    delete[] buf;
-  }
+    : msg_{ fmt_(opt_name) }
+  {}
   
 public: // MARK: instance methods
   [[nodiscard]] char const* what() const noexcept override {

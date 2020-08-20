@@ -30,5 +30,5 @@ install:
   - ${CXX} --version
 script:
   - cmake -DCMAKE_BUILD_TYPE=Debug -G "${CMAKE_GEN}" .
-  - cmake --build . --target ALL_TESTS -- -j 9
+  - cmake --build . --target ArgumentativeTests -- -j 9
   - cmake .
