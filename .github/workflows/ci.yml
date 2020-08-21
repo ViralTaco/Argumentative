@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  include:
+    - env: BUILD_CONF='--build . --target ALL_TESTS -- -j 9'
+  linux-min:
+    name: Linux Min Config
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        compiler: [clang++, g++]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Dependencies
+      run: sudo apt-get update && sudo apt-get -y install ninja-build clang g++ g++-multilib
+    - name: Run tests
+      run: |
+        cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
+        cmake $BUILD_CONF
+        cmake --build .
+      env:
+        CXX: ${{ matrix.compiler }}
+
+  linux-latest:
+    name: Linux Latest Config
+    needs: linux-min
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [clang++, g++]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Dependencies
+      run: sudo apt-get update && sudo apt-get -y install make
+    - name: Run tests
+      if: matrix.compiler == 'g++'
+      run: |
+        cmake -G "CodeBlocks - Unix Makefiles" .
+        cmake $BUILD_CONF
+        cmake --build .
+      env:
+        CXX: ${{ matrix.compiler }}
+    - name: Run tests
+      if: matrix.compiler == 'clang++'
+      run: |
+        cmake -G Ninja .
+        cmake $BUILD_CONF
+        cmake --build .
+      env:
+        CXX: ${{ matrix.compiler }}
+
+  windows:
+    name: Windows
+    needs: [linux-min]
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run Tests
+      shell: powershell
+      run: |
+        cmake .
+        cmake --build . --target ArgumentativeTests -- -j 9
+        cmake --build .
+
+  mac:
+    name: MacOS
+    needs: [linux-min]
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run Tests
+      run: |
+        cmake .
+        cmake $BUILD_CONF
+        cmake --build .

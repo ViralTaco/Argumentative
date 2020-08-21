@@ -6,7 +6,7 @@
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ASSERT_HPP "2.0.1"
+#define VT_ASSERT_HPP "2.0.0"
 
 #include <stdexcept>
 #include <string>
@@ -38,9 +38,6 @@ struct assertion_failure : public std::runtime_error {
 
 #define assert_impl__(e, f, F, l) \
   viraltaco_::assert_impl(e, #e, f, F, std::to_string(l))
-#ifndef __FILE_NAME__
-#  define __FILE_NAME__ __FILE__
-#endif
 #define assert_true(e)                                                         \
   ((void) ((e) ? ((void)0)                                                     \
   : assert_impl__(e, __PRETTY_FUNCTION__, __FILE_NAME__, __LINE__)))
