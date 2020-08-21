@@ -3,15 +3,12 @@ os: linux
 dist: trusty
 jobs:
   include:
-    - env: COMPILER=g++-5
-      dist: xenial
-
-    - env: COMPILER=clang++-8
-      dist: xenial
+    - env: COMPILER=g++-8
+      dist: bionic
       addons:
         apt:
           packages:
-            - clang-8
+            - g++-8
 
     - env:
       - COMPILER=clang++-9
