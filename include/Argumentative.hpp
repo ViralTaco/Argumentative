@@ -1,11 +1,9 @@
 #ifndef VT_ARGUMENTATIVE_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 // ┃ Argumentative.hpp:                                   ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
 // ┃ https://github.com/ViralTaco                         ┃ 
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 #define VT_ARGUMENTATIVE_HPP "1.6.0"
 
 #include "argumentative/utils/typealias.hpp"

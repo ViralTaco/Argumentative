@@ -1,7 +1,7 @@
 #ifndef VT_VERSION_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 // ┃ Version.hpp:                                         ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
+// ┃ Copyright (c) 2020,2025 viraltaco_                   ┃
 // ┃ https://github.com/ViralTaco                         ┃ 
 // ┃ SPDX-License-Identifier: MIT                         ┃
 // ┃ <http://www.opensource.org/licenses/MIT>             ┃
