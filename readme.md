@@ -1,3 +1,9 @@
+> ⚠️ This repository is archived and no longer maintained.
+> 
+> For a maintained and improved alternative that provides the same functionality, please use: [p-ranav/argparse](https://github.com/p-ranav/argparse/tree/master)
+
+---
+
 <div class="d-flex mb-3 px-3 px-md-4 px-lg-5">
   <div class="flex-auto min-width-0 width-fit mr-3">
       <h1 class="d-flex flex-wrap flex-items-center break-word f3 text-normal">
