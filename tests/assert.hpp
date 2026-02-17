@@ -1,12 +1,12 @@
 #ifndef VT_ASSERT_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ assert.hpp:                                          ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ASSERT_HPP "2.0.2"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ assert.hpp:                                                ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)    ┃
+// ┃ https://github.com/ViralTaco                               ┃
+// ┃ SPDX-License-Identifier: MIT                               ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                   ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_ASSERT_HPP "3.0.0"
 
 #include <stdexcept>
 #include <string>
@@ -36,15 +36,15 @@ struct assertion_failure : public std::runtime_error {
 }
 } namespace vt = viraltaco_;
 
-#define assert_impl__(e, f, F, l) \
+#define assert_impl_(e, f, F, l) \
   viraltaco_::assert_impl(e, #e, f, F, std::to_string(l))
-#define assert_true__(e, file)                                                 \
+#define assert_true_(e, file)                                                 \
   ((void) ((e) ? ((void)0)                                                     \
-  : assert_impl__(e, __PRETTY_FUNCTION__, file, __LINE__)))
+  : assert_impl_(e, __PRETTY_FUNCTION__, file, __LINE__)))
 #ifndef __clang__
-#  define assert_true(e) assert_true__(e, __FILE__)
+#  define assert_true(e) assert_true_(e, __FILE__)
 #else
-#  define assert_true(e) assert_true__(e, __FILE_NAME__)
+#  define assert_true(e) assert_true_(e, __FILE_NAME__)
 #endif
 #define assert_false(e) assert_true(not (e))
 #define assert_equal(a, b) assert_true(((a) == (b)))
