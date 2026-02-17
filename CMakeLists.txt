@@ -5,14 +5,14 @@ cmake_minimum_required(VERSION 3.12)
 
 project(${lib_argumentative}
         LANGUAGES       CXX
-        VERSION         1.6.2
+        VERSION         2.0.0
         DESCRIPTION     "Sweetest argument parser ever.")
 string(CONCAT tests
         ${lib_argumentative} "Tests")
 
 set(flags "-Wall -Wextra -Wpedantic -Wunreachable-code -Wredundant-decls")
 set(properties
-        CXX_STANDARD 17
+        CXX_STANDARD 23
         CXX_STANDARD_REQUIRED ON
         CXX_EXTENSIONS ON
         CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flags}"
