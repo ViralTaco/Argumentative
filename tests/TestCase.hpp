@@ -1,12 +1,12 @@
 #ifndef VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ TestCase.hpp:                                        ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_ "1.2.0"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ TestCase.hpp:                                              ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)    ┃
+// ┃ https://github.com/ViralTaco                               ┃
+// ┃ SPDX-License-Identifier: MIT                               ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                   ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_ "1.2.1"
 
 #include "assert.hpp"
 
