@@ -15,6 +15,7 @@
 #include <ios>
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 
 namespace viraltaco_ {
 class TestCase {
