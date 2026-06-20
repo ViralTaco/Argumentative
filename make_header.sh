@@ -1,4 +1,4 @@
-#!bin/env bash
+#! /bin/bash
 
 #project constants:
 APP_SRC="./include/Argumentative.hpp"

@@ -1,41 +1,43 @@
+#pragma once
 #ifndef VT_INVALID_OPTION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ InvalidOption.hpp:                                   ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_INVALID_OPTION_HPP "2.0.0"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ InvalidOption.hpp:                                        ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_INVALID_OPTION_HPP "3.0.0"
 
-#include <exception> // std::exception
-#include <string>    // std::string
-#include <sstream>   // std::stringstream
+// Standard Library
+#include <exception>
+#include <string>
+#include <sstream>
 
+// Internal
 #include "../../utils/typealias.hpp"
 
-namespace argumentative {
+namespace argumentative::inline v3_0_0 {
 
-class [[maybe_unused]] InvalidOption: public std::exception {
+class [[maybe_unused]] invalid_option: public std::exception {
 protected: // MARK: member
-  static constexpr auto fmt_ = [] (const auto s) {
-    auto fmt = StringStream();
+  static constexpr auto kFmt = [] (const auto s) {
+    auto fmt = string_stream();
     fmt << "Option " << s << " wasn't provided with an argument.";
     return fmt.str();
   };
-  String msg_;
+  string msg_;
   
 public: // MARK: init
-  explicit InvalidOption(StringView opt_name) noexcept
-    : msg_{ fmt_(opt_name) }
+  explicit invalid_option(string_view opt_name) noexcept
+    : msg_{ kFmt(opt_name) }
   {}
   
 public: // MARK: instance methods
-  [[nodiscard]] char const* what() const noexcept override {
+  [[nodiscard]] auto what() const noexcept -> char const* override {
     return msg_.c_str();
   }
 };
 
-}
-namespace ive = argumentative;
+} // namespace argumentative::inline v3_0_0
 #endif

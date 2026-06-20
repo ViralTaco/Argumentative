@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(${lib_argumentative}
         LANGUAGES       CXX
-        VERSION         2.0.0
+        VERSION         3.0.0
         DESCRIPTION     "Sweetest argument parser ever.")
 string(CONCAT tests
         ${lib_argumentative} "Tests")

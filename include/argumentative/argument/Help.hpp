@@ -1,26 +1,28 @@
+#pragma once
 #ifndef VT_HELP_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Help.hpp:                                            ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃ 
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_HELP_HPP "1.0.4"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Help.hpp:                                                 ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_HELP_HPP "3.0.0"
 
+// Internal
 #include "Argument.hpp"
 
-namespace argumentative {
+namespace argumentative::inline v3_0_0 {
 
-struct Help : public Argument {
-  [[maybe_unused]] explicit Help(StringView help) noexcept
-    : Argument{ ArgKind::help, "help", help }
+struct help : public argument {
+  [[maybe_unused]] explicit help(string_view help_str) noexcept
+    : argument{ arg_kind::help, "help", help_str }
   {}
   
-  [[maybe_unused]] Help() noexcept
-    : Help{ "Show help for this application." }
+  [[maybe_unused]] help() noexcept
+    : help{ "Show help for this application." }
   {}
 };
 
-} namespace ive = argumentative;
+} // namespace argumentative::inline v3_0_0
 #endif

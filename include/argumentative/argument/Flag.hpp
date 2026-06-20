@@ -1,20 +1,22 @@
+#pragma once
 #ifndef VT_FLAG_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Flag.hpp:                                            ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃ 
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_FLAG_HPP "2.3.2"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Flag.hpp:                                                 ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_FLAG_HPP "3.0.0"
 
+// Internal
 #include "Argument.hpp"
 
-namespace argumentative {
+namespace argumentative::inline v3_0_0 {
 
-struct Flag: public Argument {
-  using Argument::Argument;
+struct flag: public argument {
+  using argument::argument;
 };
 
-} namespace ive = argumentative;
+} // namespace argumentative::inline v3_0_0
 #endif

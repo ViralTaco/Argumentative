@@ -1,12 +1,6 @@
+#pragma once
 #ifndef VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ TestCase.hpp:                                              ┃
-// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                               ┃
-// ┃ SPDX-License-Identifier: MIT                               ┃
-// ┃ <http://www.opensource.org/licenses/MIT>                   ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_ "1.2.1"
+#define VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_ "3.0.0"
 
 #include "assert.hpp"
 
@@ -17,17 +11,17 @@
 #include <iomanip>
 #include <algorithm>
 
-namespace viraltaco_ {
-class TestCase {
+namespace viraltaco_::inline v3_0_0 {
+class test_case {
 public: // alias
-  using Lambda = void(*)();
+  using lambda_type = void(*)();
   
 private: // members
   std::string_view test_str_;
-  Lambda test_;
+  lambda_type test_;
   
 public: // inits
-  constexpr TestCase(std::string_view test_str, Lambda test) noexcept
+  constexpr test_case(std::string_view test_str, lambda_type test) noexcept
     : test_str_{ test_str }
     , test_{ test }
   {}
@@ -54,10 +48,12 @@ public: // class methods
     std::cout << line
               << "\nClass " << class_name << ":\n"
               << line << std::endl;
-    std::for_each(std::begin(all), std::end(all), TestCase::run);
+    std::ranges::for_each(all, test_case::run);
   };
 };
 
-using TestCases = std::initializer_list<TestCase>;
-} namespace vt = viraltaco_;
+using test_cases = std::initializer_list<test_case>;
+} // namespace viraltaco_::inline v3_0_0
+
+namespace vt = viraltaco_;
 #endif  // VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_

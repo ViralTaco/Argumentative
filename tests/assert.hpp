@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VT_ASSERT_HPP
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 // ┃ assert.hpp:                                                ┃
@@ -11,7 +12,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace viraltaco_ {
+namespace viraltaco_::inline v3_0_0 {
 struct assertion_failure : public std::runtime_error {
   using std::runtime_error::runtime_error;
 };
@@ -22,7 +23,7 @@ struct assertion_failure : public std::runtime_error {
     std::string const& func_name,
     std::string const& file_name,
     std::string const& line
-    ) noexcept (false) {
+    ) noexcept(false) -> void {
   if (b) {
     // assertion success
   } else {
@@ -34,11 +35,13 @@ struct assertion_failure : public std::runtime_error {
     );
   }
 }
-} namespace vt = viraltaco_;
+} // namespace viraltaco_::inline v3_0_0
+
+namespace vt = viraltaco_;
 
 #define assert_impl_(e, f, F, l) \
   viraltaco_::assert_impl(e, #e, f, F, std::to_string(l))
-#define assert_true_(e, file)                                                 \
+#define assert_true_(e, file)                                                  \
   ((void) ((e) ? ((void)0)                                                     \
   : assert_impl_(e, __PRETTY_FUNCTION__, file, __LINE__)))
 #ifndef __clang__

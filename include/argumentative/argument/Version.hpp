@@ -1,23 +1,27 @@
+#pragma once
 #ifndef VT_VERSION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Version.hpp:                                         ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃ 
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_VERSION_HPP "1.1.0"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Version.hpp:                                              ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_VERSION_HPP "3.0.0"
 
+// Standard Library
 #include <utility>
+
+// Internal
 #include "Argument.hpp"
 
-namespace argumentative {
-struct Version : public Argument {
-  [[maybe_unused]] explicit Version(String version) noexcept
-    : Argument{ ArgKind::version, "version",
+namespace argumentative::inline v3_0_0 {
+struct version : public argument {
+  [[maybe_unused]] explicit version(string version_str) noexcept
+    : argument{ arg_kind::version, "version",
                 "Show the version of this application." }
-  { this->value = std::move(version); }
+  { this->value = std::move(version_str); }
 };
 
-} namespace ive = argumentative;
+} // namespace argumentative::inline v3_0_0
 #endif

@@ -1,76 +1,78 @@
+#pragma once
 #ifndef VT_ARGUMENT_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Argument.hpp:                                        ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃ 
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENT_HPP "2.2.1"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Argument.hpp:                                              ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)    ┃
+// ┃ https://github.com/ViralTaco                               ┃ 
+// ┃ SPDX-License-Identifier: MIT                               ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                   ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_ARGUMENT_HPP "3.0.0"
 
-#include "../utils/typealias.hpp"
-#include "../utils/swap_sign.hpp"
-#include "errors/InvalidOption.hpp"
-
+// Standard Library
 #include <string_view>
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <utility>
-
 #include <algorithm>
 
-namespace argumentative {
-enum class ArgKind {
+// Internal
+#include "../utils/typealias.hpp"
+#include "../utils/swap_sign.hpp"
+#include "errors/InvalidOption.hpp"
+
+namespace argumentative::inline v3_0_0 {
+enum class arg_kind {
   version,
   option,
   flag,
   help
 };
 
-struct Argument {
+struct argument {
 public: // MARK: aliases
-  using Self = Argument;
+  using self = argument;
   
 public: // MARK: members
   static constexpr auto kTag = "--";
-  ArgKind kind;
-  String name;
-  StringView help;
-  String description;
+  arg_kind kind;
+  string name;
+  string_view help;
+  string description;
   
-  String value;
+  string value;
   bool seen = false;
   
 public: // MARK: init
-  Argument(ArgKind kind, StringView name, StringView help) noexcept
+  argument(arg_kind kind, string_view name, string_view help) noexcept
     : kind{ kind }
-    , name{ String(kTag).append(name) }
+    , name{ string(kTag).append(name) }
     , help{ help }
     , description{ this->to_string() }
     , value{ }
-    , seen{ kind == ArgKind::help or kind == ArgKind::version }
+    , seen{ kind == arg_kind::help or kind == arg_kind::version }
   {}
   
-  Argument(StringView name, StringView help) noexcept
-    : Argument{ ArgKind::flag, name, help }
+  argument(string_view name, string_view help) noexcept
+    : argument{ arg_kind::flag, name, help }
   {}
   
-  Argument() noexcept = delete;
-  Argument(Self const&) noexcept = default;
-  Argument(Self&&) = default;
+  argument() noexcept = delete;
+  argument(self const&) noexcept = default;
+  argument(self&&) noexcept = default;
   
-  Argument& operator =(Self const&) noexcept = default;
+  auto operator =(self const&) noexcept -> argument& = default;
   
-  virtual ~Argument() = default;
+  virtual ~argument() = default;
 
 public: // MARK: instance methods
-  [[nodiscard]] String to_string() const {
-    auto str = StringStream();
+  [[nodiscard]] auto to_string() const -> string {
+    auto str = string_stream();
     str << '[' << name;
     
     switch (kind) {
-    case ArgKind::option:
+    case arg_kind::option:
       str << " <" << name.substr(2) << ">]";
       break;
     default:
@@ -80,17 +82,17 @@ public: // MARK: instance methods
     return str.str();
   }
   
-  bool in(Vector<StringView> const& argv) {
+  auto in(vector<string_view> const& argv) -> bool {
     const auto end = std::end(argv);
     auto arg = std::find(std::begin(argv), end, this->name);
 
     if (not (this->seen = arg != end)) {
       return false;
-    } else if (kind == ArgKind::option) {
+    } else if (kind == arg_kind::option) {
       if ((++arg) != end) {
         this->value = *arg;
       } else {
-        throw InvalidOption(name);
+        throw invalid_option(name);
       }
     }
     return this->seen;
@@ -101,27 +103,26 @@ public: // MARK: operator overloads
     return seen;
   }
 
-  Argument& operator =(String const& arg) {
-    value = arg;
+  auto operator =(string const& arg_str) -> argument& {
+    value = arg_str;
     return *this;
   }
 
-  bool operator ==(StringView rhs) const noexcept {
+  [[nodiscard]] auto operator ==(string_view rhs) const noexcept -> bool {
     return name == rhs;
   }
 
-  bool operator ==(Argument const& rhs) const noexcept {
+  [[nodiscard]] auto operator ==(argument const& rhs) const noexcept -> bool {
     return name == rhs.name;
   }
 
 public: // MARK: friend operator overloads
-  friend std::ostream&
-  operator <<(std::ostream& out, Self const& self) noexcept {
+  friend auto operator <<(std::ostream& out, self const& self) noexcept -> std::ostream& {
     const auto padding = 20 - self.name.length();
     return out << self.name  << std::setw((padding > 0) ? padding : 1)
                << std::right << '\t' << self.help;
   }
 };
 
-} namespace ive = argumentative;
+} // namespace argumentative::inline v3_0_0
 #endif

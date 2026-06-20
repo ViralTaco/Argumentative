@@ -1,23 +1,39 @@
-#ifndef VT_ARGUMENTATIVE_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Argumentative.hpp:                                   ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "1.6.0"
+#pragma once
 
-#ifndef VT_TYPEALIAS_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ typealias.hpp:                                       ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_TYPEALIAS_HPP "1.3.1"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Argumentative.hpp:                                        ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_ARGUMENTATIVE_HPP "3.0.0"
 
+// Standard Library
+#include <algorithm>  // std::copy_if
+#include <cstddef>
+#include <cstdint>
+#include <initializer_list>
+#include <iterator>  // std::back_inserter
+#include <ranges>
+#include <sstream>
+#include <string>
+#include <string_view>
+#include <utility>  // std::move, std::forward
+#include <vector>
+
+// Internal
+
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ typealias.hpp:                                            ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_TYPEALIAS_HPP "3.0.0"
+
+// Standard Library
 #include <cstddef>
 #include <cstdint>
 #include <functional>
@@ -29,248 +45,56 @@
 #include <unordered_map>
 #include <vector>
 
-namespace argumentative {
+namespace argumentative::inline v3_0_0 {
 inline namespace typealias {
 // MARK: Integers
-using SizeType = std::size_t;
-using UInt = std::uint_fast64_t;
-using Int = std::int_fast64_t;
-using Char = char;
-using Byte = unsigned char;
+using size_type = std::size_t;
+using uint_type = std::uint_fast64_t;
+using int_type = std::int_fast64_t;
+using char_type = char;
+using byte_type = unsigned char;
 
 // MARK: Containers
 template <class T>
-using InitList = std::initializer_list<T>;
+using init_list = std::initializer_list<T>;
 template <class T>
-using Vector = std::vector<T>;
+using vector = std::vector<T>;
 template <class KeyType, class ValueType>
-using Map = std::unordered_map<KeyType, ValueType>;
+using map = std::unordered_map<KeyType, ValueType>;
 
 // MARK: Strings
-using String = std::basic_string<Char>;
-using StringView = std::basic_string_view<Char>;
-using CString = char const*;
+using string = std::basic_string<char_type>;
+using string_view = std::basic_string_view<char_type>;
+using c_string = char const*;
 
 // MARK: Streams
-using StringStream = std::stringstream;
+using string_stream = std::stringstream;
 
 // MARK: Functions
 template <class R, class... ArgTypes>
-using Function = std::function<R(ArgTypes...)>;
-using Functor = Function<void>;
+using function = std::function<R(ArgTypes...)>;
+using functor = function<void>;
 
 // MARK: Pointers
 template <class T>
-using Ptr = std::unique_ptr<T>;
+using ptr = std::unique_ptr<T>;
 
-static constexpr auto newline = "\r\n";
+static constexpr auto kNewline = "\r\n";
 }  // namespace typealias
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 
 #endif
 
-#ifndef VT_ARGUMENT_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Argument.hpp:                                        ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENT_HPP "2.2.1"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Argument.hpp:                                              ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)    ┃
+// ┃ https://github.com/ViralTaco                               ┃
+// ┃ SPDX-License-Identifier: MIT                               ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                   ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_ARGUMENT_HPP "3.0.0"
 
-#ifndef VT_TYPEALIAS_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ typealias.hpp:                                       ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_TYPEALIAS_HPP "1.3.1"
-
-#include <cstddef>
-#include <cstdint>
-#include <functional>
-#include <initializer_list>
-#include <memory>
-#include <sstream>
-#include <string>
-#include <string_view>
-#include <unordered_map>
-#include <vector>
-
-namespace argumentative {
-inline namespace typealias {
-// MARK: Integers
-using SizeType = std::size_t;
-using UInt = std::uint_fast64_t;
-using Int = std::int_fast64_t;
-using Char = char;
-using Byte = unsigned char;
-
-// MARK: Containers
-template <class T>
-using InitList = std::initializer_list<T>;
-template <class T>
-using Vector = std::vector<T>;
-template <class KeyType, class ValueType>
-using Map = std::unordered_map<KeyType, ValueType>;
-
-// MARK: Strings
-using String = std::basic_string<Char>;
-using StringView = std::basic_string_view<Char>;
-using CString = char const*;
-
-// MARK: Streams
-using StringStream = std::stringstream;
-
-// MARK: Functions
-template <class R, class... ArgTypes>
-using Function = std::function<R(ArgTypes...)>;
-using Functor = Function<void>;
-
-// MARK: Pointers
-template <class T>
-using Ptr = std::unique_ptr<T>;
-
-static constexpr auto newline = "\r\n";
-}  // namespace typealias
-}  // namespace argumentative
-namespace ive = argumentative;
-
-#endif
-
-#ifndef VT_SWAP_SIGN_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ swap_sign.hpp:                                       ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_SWAP_SIGN_HPP "1.0.1"
-
-#include <type_traits>
-
-namespace argumentative {
-
-template <class T>
-[[nodiscard, maybe_unused]] constexpr auto swap_sign(
-    const T integral) noexcept {
-  if constexpr (std::is_unsigned_v<T>) {  // unsigned --> signed
-    return static_cast<std::make_signed_t<T> >(integral);
-  } else {  // signed --> unsigned
-    return static_cast<std::make_unsigned_t<T> >(integral);
-  }
-}
-
-}  // namespace argumentative
-namespace ive = argumentative;
-
-#endif
-
-#ifndef VT_INVALID_OPTION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ InvalidOption.hpp:                                   ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_INVALID_OPTION_HPP "2.0.0"
-
-#include <exception>  // std::exception
-#include <sstream>    // std::stringstream
-#include <string>     // std::string
-
-#ifndef VT_TYPEALIAS_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ typealias.hpp:                                       ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_TYPEALIAS_HPP "1.3.1"
-
-#include <cstddef>
-#include <cstdint>
-#include <functional>
-#include <initializer_list>
-#include <memory>
-#include <sstream>
-#include <string>
-#include <string_view>
-#include <unordered_map>
-#include <vector>
-
-namespace argumentative {
-inline namespace typealias {
-// MARK: Integers
-using SizeType = std::size_t;
-using UInt = std::uint_fast64_t;
-using Int = std::int_fast64_t;
-using Char = char;
-using Byte = unsigned char;
-
-// MARK: Containers
-template <class T>
-using InitList = std::initializer_list<T>;
-template <class T>
-using Vector = std::vector<T>;
-template <class KeyType, class ValueType>
-using Map = std::unordered_map<KeyType, ValueType>;
-
-// MARK: Strings
-using String = std::basic_string<Char>;
-using StringView = std::basic_string_view<Char>;
-using CString = char const*;
-
-// MARK: Streams
-using StringStream = std::stringstream;
-
-// MARK: Functions
-template <class R, class... ArgTypes>
-using Function = std::function<R(ArgTypes...)>;
-using Functor = Function<void>;
-
-// MARK: Pointers
-template <class T>
-using Ptr = std::unique_ptr<T>;
-
-static constexpr auto newline = "\r\n";
-}  // namespace typealias
-}  // namespace argumentative
-namespace ive = argumentative;
-
-#endif
-
-namespace argumentative {
-
-class [[maybe_unused]] InvalidOption : public std::exception {
- protected:  // MARK: member
-  static constexpr auto fmt_ = [](const auto s) {
-    auto fmt = StringStream();
-    fmt << "Option " << s << " wasn't provided with an argument.";
-    return fmt.str();
-  };
-  String msg_;
-
- public:  // MARK: init
-  explicit InvalidOption(StringView opt_name) noexcept : msg_{fmt_(opt_name)} {}
-
- public:  // MARK: instance methods
-  [[nodiscard]] char const* what() const noexcept override {
-    return msg_.c_str();
-  }
-};
-
-}  // namespace argumentative
-namespace ive = argumentative;
-#endif
-
+// Standard Library
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
@@ -278,50 +102,108 @@ namespace ive = argumentative;
 #include <string_view>
 #include <utility>
 
-namespace argumentative {
-enum class ArgKind { version, option, flag, help };
+// Internal
 
-struct Argument {
+// Standard Library
+#include <type_traits>
+
+namespace argumentative::inline v3_0_0 {
+
+template <class T>
+[[nodiscard]] constexpr auto swap_sign(const T integral) noexcept -> auto {
+  if constexpr (std::is_unsigned_v<T>) {
+    return static_cast<std::make_signed_t<T>>(integral);
+  } else {
+    return static_cast<std::make_unsigned_t<T>>(integral);
+  }
+}
+
+}  // namespace argumentative::inline v3_0_0
+
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ InvalidOption.hpp:                                        ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_INVALID_OPTION_HPP "3.0.0"
+
+// Standard Library
+#include <exception>
+#include <sstream>
+#include <string>
+
+// Internal
+
+namespace argumentative::inline v3_0_0 {
+
+class [[maybe_unused]] invalid_option : public std::exception {
+ protected:  // MARK: member
+  static constexpr auto kFmt = [](const auto s) {
+    auto fmt = string_stream();
+    fmt << "Option " << s << " wasn't provided with an argument.";
+    return fmt.str();
+  };
+  string msg_;
+
+ public:  // MARK: init
+  explicit invalid_option(string_view opt_name) noexcept
+      : msg_{kFmt(opt_name)} {}
+
+ public:  // MARK: instance methods
+  [[nodiscard]] auto what() const noexcept -> char const* override {
+    return msg_.c_str();
+  }
+};
+
+}  // namespace argumentative::inline v3_0_0
+#endif
+
+namespace argumentative::inline v3_0_0 {
+enum class arg_kind { version, option, flag, help };
+
+struct argument {
  public:  // MARK: aliases
-  using Self = Argument;
+  using self = argument;
 
  public:  // MARK: members
   static constexpr auto kTag = "--";
-  ArgKind kind;
-  String name;
-  StringView help;
-  String description;
+  arg_kind kind;
+  string name;
+  string_view help;
+  string description;
 
-  String value;
+  string value;
   bool seen = false;
 
  public:  // MARK: init
-  Argument(ArgKind kind, StringView name, StringView help) noexcept
+  argument(arg_kind kind, string_view name, string_view help) noexcept
       : kind{kind},
-        name{String(kTag).append(name)},
+        name{string(kTag).append(name)},
         help{help},
         description{this->to_string()},
         value{},
-        seen{kind == ArgKind::help or kind == ArgKind::version} {}
+        seen{kind == arg_kind::help or kind == arg_kind::version} {}
 
-  Argument(StringView name, StringView help) noexcept
-      : Argument{ArgKind::flag, name, help} {}
+  argument(string_view name, string_view help) noexcept
+      : argument{arg_kind::flag, name, help} {}
 
-  Argument() noexcept = delete;
-  Argument(Self const&) noexcept = default;
-  Argument(Self&&) = default;
+  argument() noexcept = delete;
+  argument(self const&) noexcept = default;
+  argument(self&&) noexcept = default;
 
-  Argument& operator=(Self const&) noexcept = default;
+  auto operator=(self const&) noexcept -> argument& = default;
 
-  virtual ~Argument() = default;
+  virtual ~argument() = default;
 
  public:  // MARK: instance methods
-  [[nodiscard]] String to_string() const {
-    auto str = StringStream();
+  [[nodiscard]] auto to_string() const -> string {
+    auto str = string_stream();
     str << '[' << name;
 
     switch (kind) {
-      case ArgKind::option:
+      case arg_kind::option:
         str << " <" << name.substr(2) << ">]";
         break;
       default:
@@ -331,17 +213,17 @@ struct Argument {
     return str.str();
   }
 
-  bool in(Vector<StringView> const& argv) {
+  auto in(vector<string_view> const& argv) -> bool {
     const auto end = std::end(argv);
     auto arg = std::find(std::begin(argv), end, this->name);
 
     if (not(this->seen = arg != end)) {
       return false;
-    } else if (kind == ArgKind::option) {
+    } else if (kind == arg_kind::option) {
       if ((++arg) != end) {
         this->value = *arg;
       } else {
-        throw InvalidOption(name);
+        throw invalid_option(name);
       }
     }
     return this->seen;
@@ -350,200 +232,198 @@ struct Argument {
  public:  // MARK: operator overloads
   explicit operator bool() const noexcept { return seen; }
 
-  Argument& operator=(String const& arg) {
-    value = arg;
+  auto operator=(string const& arg_str) -> argument& {
+    value = arg_str;
     return *this;
   }
 
-  bool operator==(StringView rhs) const noexcept { return name == rhs; }
+  [[nodiscard]] auto operator==(string_view rhs) const noexcept -> bool {
+    return name == rhs;
+  }
 
-  bool operator==(Argument const& rhs) const noexcept {
+  [[nodiscard]] auto operator==(argument const& rhs) const noexcept -> bool {
     return name == rhs.name;
   }
 
  public:  // MARK: friend operator overloads
-  friend std::ostream& operator<<(std::ostream& out,
-                                  Self const& self) noexcept {
+  friend auto operator<<(std::ostream& out, self const& self) noexcept
+      -> std::ostream& {
     const auto padding = 20 - self.name.length();
     return out << self.name << std::setw((padding > 0) ? padding : 1)
                << std::right << '\t' << self.help;
   }
 };
 
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 #endif
 
-#ifndef VT_FLAG_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Flag.hpp:                                            ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_FLAG_HPP "2.3.2"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Flag.hpp:                                                 ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_FLAG_HPP "3.0.0"
 
-namespace argumentative {
+// Internal
 
-struct Flag : public Argument {
-  using Argument::Argument;
+namespace argumentative::inline v3_0_0 {
+
+struct flag : public argument {
+  using argument::argument;
 };
 
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 #endif
 
-#ifndef VT_OPTION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Option.hpp:                                          ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_OPTION_HPP "7.2.0"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Option.hpp:                                               ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_OPTION_HPP "3.0.0"
 
+// Standard Library
 #include <string_view>
 #include <utility>
 
-namespace argumentative {
+// Internal
+
+namespace argumentative::inline v3_0_0 {
 /**
  * This structure hold a name and the help message.
  * If it is equal to one of the arguments parsed at runtime
  * then an object containing a reference to it and the corresponding argument
  */
-struct Option : public Argument {
+struct option : public argument {
  public:  // MARK: init
-  [[maybe_unused]] Option(StringView name, StringView help) noexcept
-      : Argument{ArgKind::option, name, help} {}
+  [[maybe_unused]] option(string_view name, string_view help) noexcept
+      : argument{arg_kind::option, name, help} {}
 };
 
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 #endif
 
-#ifndef VT_HELP_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Help.hpp:                                            ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_HELP_HPP "1.0.4"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Help.hpp:                                                 ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_HELP_HPP "3.0.0"
 
-namespace argumentative {
+// Internal
 
-struct Help : public Argument {
-  [[maybe_unused]] explicit Help(StringView help) noexcept
-      : Argument{ArgKind::help, "help", help} {}
+namespace argumentative::inline v3_0_0 {
 
-  [[maybe_unused]] Help() noexcept : Help{"Show help for this application."} {}
+struct help : public argument {
+  [[maybe_unused]] explicit help(string_view help_str) noexcept
+      : argument{arg_kind::help, "help", help_str} {}
+
+  [[maybe_unused]] help() noexcept : help{"Show help for this application."} {}
 };
 
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 #endif
 
-#ifndef VT_VERSION_HPP
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃ Version.hpp:                                         ┃
-// ┃ Copyright (c) 2020 viraltaco_ (viraltaco@gmx.com)    ┃
-// ┃ https://github.com/ViralTaco                         ┃
-// ┃ SPDX-License-Identifier: MIT                         ┃
-// ┃ <http://www.opensource.org/licenses/MIT>             ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_VERSION_HPP "1.1.0"
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+// ┃ Version.hpp:                                              ┃
+// ┃ Copyright (c) 2020, 2026 viraltaco_ (viraltaco@gmx.com)   ┃
+// ┃ https://github.com/ViralTaco                              ┃
+// ┃ SPDX-License-Identifier: MIT                              ┃
+// ┃ <http://www.opensource.org/licenses/MIT>                  ┃
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+#define VT_VERSION_HPP "3.0.0"
 
+// Standard Library
 #include <utility>
 
-namespace argumentative {
-struct Version : public Argument {
-  [[maybe_unused]] explicit Version(String version) noexcept
-      : Argument{ArgKind::version, "version",
+// Internal
+
+namespace argumentative::inline v3_0_0 {
+struct version : public argument {
+  [[maybe_unused]] explicit version(string version_str) noexcept
+      : argument{arg_kind::version, "version",
                  "Show the version of this application."} {
-    this->value = std::move(version);
+    this->value = std::move(version_str);
   }
 };
 
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 #endif
 
-#include <algorithm>  // std::copy_if
-#include <cstddef>
-#include <cstdint>
-#include <initializer_list>
-#include <iterator>  // std::back_inserter
-#include <sstream>
-#include <string>
-#include <string_view>
-#include <utility>  // std::move, std::forward
-#include <vector>
-
-namespace argumentative {
-class Argumentative {
+namespace argumentative::inline v3_0_0 {
+class argumentative {
  public:  // MARK: aliases
-  using Self = Argumentative;
-  using ArgVec = Vector<Argument>;
+  using self = argumentative;
+  using arg_vec = vector<argument>;
 
  private:  // MARK: members
-  Vector<StringView> argv_;
-  ArgVec args_;
-  ArgVec matches_;
+  alignas(64) vector<string_view> argv_;
+  alignas(64) arg_vec args_;
+  alignas(64) arg_vec matches_;
 
-  StringView app_name_;
-  String app_version_;
+  string_view app_name_;
+  string app_version_;
 
  public:  // MARK: init
-  [[maybe_unused]] Argumentative(const int argc, char** argv)
+  [[maybe_unused]] argumentative(const int argc, char** argv)
       : argv_{argv, argv + argc},
         args_{},
         matches_{},
-        app_name_{Self::app_name(argv_[0])},
+        app_name_{self::app_name(argv_[0])},
         app_version_{} {}
 
-  [[maybe_unused]] Argumentative(const int argc, char** argv,
-                                 InitList<Argument> args)
+  [[maybe_unused]] argumentative(const int argc, char** argv,
+                                 init_list<argument> args)
       : argv_{argv, argv + argc},
         args_{args.begin(), args.end()},
-        matches_{Self::matches(args_, argv_)},
-        app_name_{Self::app_name(argv_[0])},
+        matches_{self::matches(args_, argv_)},
+        app_name_{self::app_name(argv_[0])},
         app_version_{} {}
 
   // MARK: rule of five
-  Argumentative() noexcept = default;
-  Argumentative(Self&&) noexcept = default;
-  Argumentative(Self const&) noexcept = default;
-  Argumentative& operator=(Self const&) noexcept = default;
+  argumentative() noexcept = default;
+  argumentative(self&&) noexcept = default;
+  argumentative(self const&) noexcept = default;
+  auto operator=(self const&) noexcept -> argumentative& = default;
 
-  virtual ~Argumentative() noexcept = default;
+  virtual ~argumentative() = default;
 
  public:  // MARK: class methods
-  static constexpr StringView app_name(StringView prog_path) noexcept {
-    return prog_path.substr(prog_path.rfind('/') + 1u);
+  [[nodiscard]] static constexpr auto app_name(string_view prog_path) noexcept
+      -> string_view {
+    return prog_path.substr(prog_path.rfind('/') + 1zu);
   }
 
-  static ArgVec matches(ArgVec& args, Vector<StringView> const& argv) noexcept {
-    auto matches = ArgVec();
-    std::copy_if(std::begin(args), std::end(args),          // Source
-                 std::back_inserter(matches),               // Destination
-                 [&](auto& arg) { return arg.in(argv); });  // Predicate
+  [[nodiscard]] static auto matches(arg_vec& args,
+                                    vector<string_view> const& argv)
+      -> arg_vec {
+    auto matches = arg_vec();
+
+    for (auto& arg :
+         args | std::views::filter([&](auto& a) { return a.in(argv); })) {
+      matches.push_back(arg);
+    }
+
     return matches;
   }
 
  public:  // MARK: instance methods
-  Self& append(InitList<Argument> const& args) {
+  auto append(init_list<argument> const& args) -> self& {
     for (auto const& arg : args) {  // Making a copy.
       this->append(arg);
     }
     return *this;
   }
 
-  Self& append(Argument arg) {
+  auto append(argument arg) -> self& {
     args_.push_back(arg);
-    if (arg.kind == ArgKind::version) {
+    if (arg.kind == arg_kind::version) {
       app_version_ = arg.value;
     }
     if (arg.in(argv_)) {
@@ -552,70 +432,71 @@ class Argumentative {
     return *this;
   }
 
-  [[nodiscard]] String usage() const noexcept {
-    auto usage = StringStream();
-    usage << "Usage: " << app_name_ << ' ';
+  [[nodiscard]] auto usage() const -> string {
+    auto usg = string_stream();
+    usg << "Usage: " << app_name_ << ' ';
 
     for (auto const& arg : args_) {
-      usage << arg.description << ' ';
+      usg << arg.description << ' ';
     }
 
-    usage << newline;
+    usg << kNewline;
     for (auto const& arg : args_) {
-      usage << newline << arg;
+      usg << kNewline << arg;
     }
 
-    return usage.str();
+    return usg.str();
   }
 
-  [[nodiscard, maybe_unused]] String version() const noexcept {
-    auto version = StringStream();
-    version << app_name_ << ' ' << app_version_ << newline;
-    return version.str();
+  [[nodiscard, maybe_unused]] auto version() const -> string {
+    auto ver = string_stream();
+    ver << app_name_ << ' ' << app_version_ << kNewline;
+    return ver.str();
   }
 
  public:  // MARK: operator overloads
-  auto operator+=(InitList<Argument> const& args) { return this->append(args); }
+  auto operator+=(init_list<argument> const& args) -> auto {
+    return this->append(args);
+  }
 
-  auto operator+=(Argument const& arg) { return this->append(arg); }
+  auto operator+=(argument const& arg) -> auto { return this->append(arg); }
 
-  auto operator<<(Argument const& rhs) { return this->append(rhs); }
+  auto operator<<(argument const& rhs) -> auto { return this->append(rhs); }
 
  public:  // MARK: friend operator overloads
-  friend std::ostream& operator<<(std::ostream& out, Self const& self) {
+  friend auto operator<<(std::ostream& out, self const& self) -> std::ostream& {
     return out << self.usage();
   }
 
  public:  // MARK: constraint 'Container'
-  [[nodiscard, maybe_unused]] auto empty() const noexcept {
+  [[nodiscard, maybe_unused]] auto empty() const noexcept -> bool {
     return matches_.empty();
   }
 
-  [[maybe_unused]] auto begin() noexcept { return matches_.begin(); }
+  [[maybe_unused]] auto begin() noexcept -> auto { return matches_.begin(); }
 
-  [[nodiscard, maybe_unused]] auto cbegin() const noexcept {
-    return const_cast<ArgVec const&>(matches_).begin();
+  [[nodiscard, maybe_unused]] auto cbegin() const noexcept -> auto {
+    return const_cast<arg_vec const&>(matches_).begin();
   }
 
-  [[maybe_unused]] auto rbegin() noexcept { return matches_.rbegin(); }
+  [[maybe_unused]] auto rbegin() noexcept -> auto { return matches_.rbegin(); }
 
-  [[nodiscard, maybe_unused]] auto crbegin() const noexcept {
-    return const_cast<ArgVec const&>(matches_).rbegin();
+  [[nodiscard, maybe_unused]] auto crbegin() const noexcept -> auto {
+    return const_cast<arg_vec const&>(matches_).rbegin();
   }
 
-  [[maybe_unused]] auto end() noexcept { return matches_.end(); }
+  [[maybe_unused]] auto end() noexcept -> auto { return matches_.end(); }
 
-  [[nodiscard, maybe_unused]] auto cend() const noexcept {
-    return const_cast<ArgVec const&>(matches_).end();
+  [[nodiscard, maybe_unused]] auto cend() const noexcept -> auto {
+    return const_cast<arg_vec const&>(matches_).end();
   }
 
-  [[maybe_unused]] auto rend() noexcept { return matches_.rend(); }
+  [[maybe_unused]] auto rend() noexcept -> auto { return matches_.rend(); }
 
-  [[nodiscard, maybe_unused]] auto crend() const noexcept {
-    return const_cast<ArgVec const&>(matches_).rend();
+  [[nodiscard, maybe_unused]] auto crend() const noexcept -> auto {
+    return const_cast<arg_vec const&>(matches_).rend();
   }
 };
 
-}  // namespace argumentative
-namespace ive = argumentative;
+}  // namespace argumentative::inline v3_0_0
 #endif
