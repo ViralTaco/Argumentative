@@ -7,7 +7,7 @@
 // ┃ SPDX-License-Identifier: MIT                              ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                  ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENTATIVE_HPP "3.0.0"
+#define VT_ARGUMENTATIVE_HPP "3.1.0"
 
 // Standard Library
 #include <utility>   // std::move, std::forward
@@ -30,7 +30,7 @@
 #include "argumentative/argument/Help.hpp"
 #include "argumentative/argument/Version.hpp"
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 class argumentative {
 public: // MARK: aliases
   using self = argumentative;
@@ -95,8 +95,8 @@ public: // MARK: instance methods
   
   auto append(argument arg) -> self& {
     args_.push_back(arg);
-    if (arg.kind == arg_kind::version) {
-      app_version_ = arg.value;
+    if (arg.kind() == arg_kind::version) {
+      app_version_ = arg.value();
     }
     if (arg.in(argv_)) {
       matches_.push_back(arg);
@@ -109,7 +109,7 @@ public: // MARK: instance methods
     usg << "Usage: " << app_name_ << ' ';
     
     for (auto const& arg: args_) {
-      usg << arg.description << ' ';
+      usg << arg.description() << ' ';
     }
     
     usg << kNewline;
@@ -182,5 +182,5 @@ public: // MARK: constraint 'Container'
   }
 };
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 #endif

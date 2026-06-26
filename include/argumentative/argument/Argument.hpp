@@ -7,7 +7,7 @@
 // ┃ SPDX-License-Identifier: MIT                               ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                   ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ARGUMENT_HPP "3.0.0"
+#define VT_ARGUMENT_HPP "3.1.0"
 
 // Standard Library
 #include <string_view>
@@ -22,7 +22,7 @@
 #include "../utils/swap_sign.hpp"
 #include "errors/InvalidOption.hpp"
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 enum class arg_kind {
   version,
   option,
@@ -34,24 +34,34 @@ struct argument {
 public: // MARK: aliases
   using self = argument;
   
-public: // MARK: members
+public: // MARK: constants
   static constexpr auto kTag = "--";
-  arg_kind kind;
-  string name;
-  string_view help;
-  string description;
   
-  string value;
-  bool seen = false;
+private: // MARK: members
+  arg_kind kind_;
+  string name_;
+  string_view help_;
+  string description_;
+  
+  string value_;
+  bool seen_ = false;
+  
+public: // MARK: getters
+  [[nodiscard]] constexpr auto kind() const noexcept -> arg_kind { return kind_; }
+  [[nodiscard]] auto name() const noexcept -> string const& { return name_; }
+  [[nodiscard]] constexpr auto help() const noexcept -> string_view { return help_; }
+  [[nodiscard]] auto description() const noexcept -> string const& { return description_; }
+  [[nodiscard]] auto value() const noexcept -> string const& { return value_; }
+  [[nodiscard]] constexpr auto seen() const noexcept -> bool { return seen_; }
   
 public: // MARK: init
-  argument(arg_kind kind, string_view name, string_view help) noexcept
-    : kind{ kind }
-    , name{ string(kTag).append(name) }
-    , help{ help }
-    , description{ this->to_string() }
-    , value{ }
-    , seen{ kind == arg_kind::help or kind == arg_kind::version }
+  argument(arg_kind arg_kind, string_view arg_name, string_view arg_help) noexcept
+    : kind_{ arg_kind }
+    , name_{ string(kTag).append(arg_name) }
+    , help_{ arg_help }
+    , description_{ this->to_string() }
+    , value_{ }
+    , seen_{ arg_kind == arg_kind::help or arg_kind == arg_kind::version }
   {}
   
   argument(string_view name, string_view help) noexcept
@@ -69,11 +79,11 @@ public: // MARK: init
 public: // MARK: instance methods
   [[nodiscard]] auto to_string() const -> string {
     auto str = string_stream();
-    str << '[' << name;
+    str << '[' << name_;
     
-    switch (kind) {
+    switch (kind_) {
     case arg_kind::option:
-      str << " <" << name.substr(2) << ">]";
+      str << " <" << name_.substr(2) << ">]";
       break;
     default:
       str << ']';
@@ -84,45 +94,45 @@ public: // MARK: instance methods
   
   auto in(vector<string_view> const& argv) -> bool {
     const auto end = std::end(argv);
-    auto arg = std::find(std::begin(argv), end, this->name);
+    auto arg = std::find(std::begin(argv), end, this->name_);
 
-    if (not (this->seen = arg != end)) {
+    if (not (this->seen_ = arg != end)) {
       return false;
-    } else if (kind == arg_kind::option) {
+    } else if (kind_ == arg_kind::option) {
       if ((++arg) != end) {
-        this->value = *arg;
+        this->value_ = *arg;
       } else {
-        throw invalid_option(name);
+        throw invalid_option(name_);
       }
     }
-    return this->seen;
+    return this->seen_;
   }
 
 public: // MARK: operator overloads
   explicit operator bool() const noexcept {
-    return seen;
+    return seen_;
   }
 
   auto operator =(string const& arg_str) -> argument& {
-    value = arg_str;
+    value_ = arg_str;
     return *this;
   }
 
   [[nodiscard]] auto operator ==(string_view rhs) const noexcept -> bool {
-    return name == rhs;
+    return name_ == rhs;
   }
 
   [[nodiscard]] auto operator ==(argument const& rhs) const noexcept -> bool {
-    return name == rhs.name;
+    return name_ == rhs.name_;
   }
 
 public: // MARK: friend operator overloads
   friend auto operator <<(std::ostream& out, self const& self) noexcept -> std::ostream& {
-    const auto padding = 20 - self.name.length();
-    return out << self.name  << std::setw((padding > 0) ? padding : 1)
-               << std::right << '\t' << self.help;
+    const auto padding = 20 - self.name_.length();
+    return out << self.name_  << std::setw((padding > 0) ? padding : 1)
+               << std::right << '\t' << self.help_;
   }
 };
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 #endif

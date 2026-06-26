@@ -1,6 +1,6 @@
 #pragma once
 #ifndef VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_
-#define VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_ "3.0.0"
+#define VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_ "3.1.0"
 
 #include "assert.hpp"
 
@@ -11,7 +11,7 @@
 #include <iomanip>
 #include <algorithm>
 
-namespace viraltaco_::inline v3_0_0 {
+namespace viraltaco_::inline v3_1_0 {
 class test_case {
 public: // alias
   using lambda_type = void(*)();
@@ -27,7 +27,7 @@ public: // inits
   {}
 
 public: // class methods
-  static constexpr auto run = [] (auto const& self) {
+  static constexpr auto run = [] (auto const& self) -> void {
     const auto padding = (60 - 8) - self.test_str_.length();
     std::cout << "Testing " << self.test_str_ << ':';
     if (padding > 0) { std::cout << std::setw(padding); }
@@ -43,7 +43,7 @@ public: // class methods
     }
   };
   
-  static constexpr auto test_all = [] (auto all, auto class_name) {
+  static constexpr auto test_all = [] (auto all, auto class_name) -> void {
     const auto line = std::string(60, '=');
     std::cout << line
               << "\nClass " << class_name << ":\n"
@@ -53,7 +53,7 @@ public: // class methods
 };
 
 using test_cases = std::initializer_list<test_case>;
-} // namespace viraltaco_::inline v3_0_0
+} // namespace viraltaco_::inline v3_1_0
 
 namespace vt = viraltaco_;
 #endif  // VT_ARGUMENTATIVETEST_TESTS_TESTCASE_HPP_

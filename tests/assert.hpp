@@ -7,12 +7,12 @@
 // ┃ SPDX-License-Identifier: MIT                               ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                   ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_ASSERT_HPP "3.0.0"
+#define VT_ASSERT_HPP "3.1.0"
 
 #include <stdexcept>
 #include <string>
 
-namespace viraltaco_::inline v3_0_0 {
+namespace viraltaco_::inline v3_1_0 {
 struct assertion_failure : public std::runtime_error {
   using std::runtime_error::runtime_error;
 };
@@ -35,7 +35,7 @@ struct assertion_failure : public std::runtime_error {
     );
   }
 }
-} // namespace viraltaco_::inline v3_0_0
+} // namespace viraltaco_::inline v3_1_0
 
 namespace vt = viraltaco_;
 

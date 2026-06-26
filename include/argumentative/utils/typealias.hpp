@@ -7,7 +7,7 @@
 // ┃ SPDX-License-Identifier: MIT                              ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                  ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_TYPEALIAS_HPP "3.0.0"
+#define VT_TYPEALIAS_HPP "3.1.0"
 
 // Standard Library
 #include <initializer_list>
@@ -21,7 +21,7 @@
 #include <memory>
 #include <functional>
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 inline namespace typealias {
   // MARK: Integers
   using size_type = std::size_t;
@@ -54,6 +54,6 @@ inline namespace typealias {
 
   static constexpr auto kNewline = "\r\n";
 } // inline namespace typealias
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 
 #endif

@@ -7,7 +7,7 @@
 // ┃ SPDX-License-Identifier: MIT                              ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                  ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_INVALID_OPTION_HPP "3.0.0"
+#define VT_INVALID_OPTION_HPP "3.1.0"
 
 // Standard Library
 #include <exception>
@@ -17,11 +17,11 @@
 // Internal
 #include "../../utils/typealias.hpp"
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 
 class [[maybe_unused]] invalid_option: public std::exception {
 protected: // MARK: member
-  static constexpr auto kFmt = [] (const auto s) {
+  static constexpr auto kFmt = [] (const auto s) -> string {
     auto fmt = string_stream();
     fmt << "Option " << s << " wasn't provided with an argument.";
     return fmt.str();
@@ -39,5 +39,5 @@ public: // MARK: instance methods
   }
 };
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 #endif

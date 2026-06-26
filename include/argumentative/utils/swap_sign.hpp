@@ -5,7 +5,7 @@
 // Standard Library
 #include <type_traits>
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 
   template <class T>
   [[nodiscard]] constexpr auto swap_sign(const T integral) noexcept -> auto {
@@ -16,6 +16,6 @@ namespace argumentative::inline v3_0_0 {
     }
   }
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 
 #endif // VT_SWAP_SIGN_HPP

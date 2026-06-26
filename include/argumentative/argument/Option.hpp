@@ -7,7 +7,7 @@
 // ┃ SPDX-License-Identifier: MIT                              ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                  ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_OPTION_HPP "3.0.0"
+#define VT_OPTION_HPP "3.1.0"
 
 // Standard Library
 #include <string_view>
@@ -18,7 +18,7 @@
 #include "errors/InvalidOption.hpp"
 #include "Argument.hpp"
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 /**
  * This structure hold a name and the help message.
  * If it is equal to one of the arguments parsed at runtime
@@ -31,5 +31,5 @@ public: // MARK: init
   {}
 };
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 #endif

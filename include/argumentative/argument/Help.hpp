@@ -7,12 +7,12 @@
 // ┃ SPDX-License-Identifier: MIT                              ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                  ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_HELP_HPP "3.0.0"
+#define VT_HELP_HPP "3.1.0"
 
 // Internal
 #include "Argument.hpp"
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 
 struct help : public argument {
   [[maybe_unused]] explicit help(string_view help_str) noexcept
@@ -24,5 +24,5 @@ struct help : public argument {
   {}
 };
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 #endif

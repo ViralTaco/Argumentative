@@ -7,7 +7,7 @@
 // ┃ SPDX-License-Identifier: MIT                              ┃
 // ┃ <http://www.opensource.org/licenses/MIT>                  ┃
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-#define VT_VERSION_HPP "3.0.0"
+#define VT_VERSION_HPP "3.1.0"
 
 // Standard Library
 #include <utility>
@@ -15,13 +15,13 @@
 // Internal
 #include "Argument.hpp"
 
-namespace argumentative::inline v3_0_0 {
+namespace argumentative::inline v3_1_0 {
 struct version : public argument {
   [[maybe_unused]] explicit version(string version_str) noexcept
     : argument{ arg_kind::version, "version",
                 "Show the version of this application." }
-  { this->value = std::move(version_str); }
+  { argument::operator=(std::move(version_str)); }
 };
 
-} // namespace argumentative::inline v3_0_0
+} // namespace argumentative::inline v3_1_0
 #endif
